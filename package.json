@@ -1,0 +1,25 @@
+{
+  "name": "node-notes-api",
+  "version": "1.0.0",
+  "description": "NodeJS Notes app API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaitsev-oleksii/node-notes-api.git"
+  },
+  "author": "Oleksii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaitsev-oleksii/node-notes-api/issues"
+  },
+  "homepage": "https://github.com/zaitsev-oleksii/node-notes-api#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "sequelize": "^6.19.0",
+    "sqlite3": "^5.0.8",
+    "yup": "^0.32.11"
+  }
+}
