@@ -1,7 +1,7 @@
 const express = require('express');
-const sequelize = require('./repositories/db.js');
+const { sequelize } = require('./repositories');
 
-const { initialNotes } = require('./config.js');
+const { initialNotes } = require('./config');
 
 
 const app = express();
@@ -23,23 +23,10 @@ const assertDBConnection = async () => {
 app.use(express.urlencoded({ extended: true }));
 app.use('/', require('./routes'));
 
-// app.get('/', (req, res) => {
-//   res.send('Hiiiiii!');
-// });
-
-// app.get('/notes', (req, res) => {
-//   res.send(JSON.stringify(notes.getNotes()));
-// });
-
-// app.get('/notes/:id', (req, res) => {
-//   const id = +req.params.id;
-//   res.send(JSON.stringify(notes.getById(id)));
-// });
-
 const run = async () => {
   await assertDBConnection();
 
-    // Filling db with Initial Notes
+  // Filling db with Initial Notes
   await sequelize.sync({ force: true });
   for (const note of initialNotes) {
     sequelize.models.Note.create(note);

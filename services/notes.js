@@ -1,30 +1,23 @@
-const { noteSchema } = require('./schemas.js');
+const { noteSchema } = require('./schemas');
 const repository = require('../repositories');
+
 
 const getNoteById = async (id) => {
   const note = await repository.getNoteById(id);
   if (!note)
     throw new Error(`Note with id=${id} doesn't exist.`);
+  
   return note;
-  // const note = notes.getById(id);
-  // if (note)
-  //   return note;
-  // return `Note with id=${id} doesn't exist.`;
 }
 
 const getAllNotes = async () => {
   return await repository.getAllNotes();
-  // return notes.getNotes();
 }
 
 const addNote = async (data) => {
   try {
     const note = noteSchema.validateSync(data, { stripUnknown: true });
-    console.log(note);
-    // notes.addNote(note);
-    // note.creationTime = getCurrentDateTime();
     await repository.addNote(note);
-    // return `Note successfully added.`;
   } catch (error) {
     throw new Error(`Error occured when adding note. ${error.message}`);
   }
@@ -39,7 +32,6 @@ const editNote = async (id, data) => {
   try {
     const note = noteSchema.validateSync(data, { stripUnknown: true });
     await repository.editNote(id, note);
-    // notes.editNote(id, note);
   } catch (error) {
     return `Error occured when editing note. ${error.message}`;
   }
@@ -49,9 +41,8 @@ const editNote = async (id, data) => {
 
 const deleteNote = async (id) => {
   const note = await repository.getNoteById(id);
-  if (note)
+  if (!note)
     throw new Error(`Note with id=${id} doesn't exist.`);
-    // notes.deleteNote(id);
   try {
     await repository.deleteNote(id);
   } catch (error) {
@@ -62,13 +53,8 @@ const deleteNote = async (id) => {
 }
 
 const getSummary = async () => {
-  // const res = {};
-  // for (category of categories) {
-  //   res[category] = notes.getNotes().filter(note => note.category === category).length;
-  // }
-  const summary = await repository.countByCategories();
-  // console.log(summary)
-  return summary;
+  return await repository.countByCategories();
 }
+
 
 module.exports = { getAllNotes, getNoteById, addNote, editNote, deleteNote, getSummary }

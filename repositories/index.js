@@ -1,4 +1,4 @@
-const sequelize = require('./db.js');
+const sequelize = require('./db');
 
 
 const getNoteById = async (id) => {
@@ -31,6 +31,7 @@ const countByCategories = async (id) => {
     group: 'category'
   })
 }
+
 
 module.exports = {
   sequelize,

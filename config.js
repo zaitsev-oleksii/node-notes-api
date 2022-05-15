@@ -11,4 +11,5 @@ const initialNotes = [
   }
 ];
 
+
 module.exports = { categories, initialNotes };
