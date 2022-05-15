@@ -19,7 +19,8 @@ const getAllNotes = async () => {
 
 const addNote = async (data) => {
   try {
-    const note = noteSchema.validateSync(data, { strict: true });
+    const note = noteSchema.validateSync(data, { stripUnknown: true });
+    console.log(note);
     // notes.addNote(note);
     // note.creationTime = getCurrentDateTime();
     await repository.addNote(note);
@@ -36,7 +37,7 @@ const editNote = async (id, data) => {
   if (!noteExists) 
     throw new Error(`Note with id=${id} doesn't exist.`);
   try {
-    const note = noteSchema.validateSync(data, { strict: true });
+    const note = noteSchema.validateSync(data, { stripUnknown: true });
     await repository.editNote(id, note);
     // notes.editNote(id, note);
   } catch (error) {
